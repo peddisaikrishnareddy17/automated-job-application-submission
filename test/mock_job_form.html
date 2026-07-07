@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Job Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; max-width: 600px; }
+        div { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="url"], input[type="tel"], textarea {
+            width: 100%; padding: 8px; box-sizing: border-box;
+        }
+        .submit-button { padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; }
+        .submit-button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Job Application Portal</h1>
+    <form id="job-apply-form" onsubmit="event.preventDefault(); document.getElementById('success').innerText = 'Application Submitted Successfully!';">
+        <!-- Weird nesting for Name -->
+        <div class="field-container z-layer">
+            <span>
+                <label>Tell us your identity</label>
+                <!-- Purposely no id or basic name -->
+                <input type="text" name="n_a_m_e_val" required placeholder="John Doe" aria-label="first and last" />
+            </span>
+        </div>
+        
+        <!-- Deeply nested Email -->
+        <div>
+            <div class="inner-block">
+                <label>Where can we reach you digitally?</label>
+                <input type="email" id="contact_node_77" name="electronic_mail" required />
+            </div>
+        </div>
+        
+        <!-- Obscure Phone element -->
+        <div>
+            <label>Dialing digits</label>
+            <input type="tel" id="mobile_digits_9z" aria-label="cellphone" />
+        </div>
+        
+        <!-- Location (New variable mapped from Resume address) -->
+        <div>
+            <label>Current City / Address</label>
+            <input type="text" name="candidate_residence" placeholder="San Francisco, CA" />
+        </div>
+        
+        <!-- Hidden elements to trick standard script scrapers -->
+        <input type="hidden" name="name" value="dont_touch_me" />
+        <input type="hidden" id="email" value="fake@email.com" />
+
+        <!-- Unconventional URL inputs -->
+        <div class="urls-wrap">
+            <label>Network Profile (LI)</label>
+            <input type="url" name="social_lnkd" />
+            
+            <label>GitHub or Personal Site</label>
+            <input type="url" name="git_or_web" placeholder="Show us your code" />
+        </div>
+        
+        <!-- Custom styled file uploader -->
+        <div class="upload-zone">
+            <label>Please attach your CV payload here</label>
+            <!-- ID/name has nothing to do with 'resume' -> uses Accept and Type instead -->
+            <input type="file" id="document_attachment_blob" accept=".pdf,.doc,.docx" />
+        </div>
+        
+        <!-- Textarea without standard names -->
+        <div>
+            <label>Why do you want to work here?</label>
+            <textarea name="candidate_motivation_notes" rows="6" placeholder="Write a brief message..."></textarea>
+        </div>
+        
+        <button type="submit" class="apply-button" id="final-btn">Submit Application</button>
+    </form>
+    <p id="success" style="color: green; font-weight: bold; font-size: 1.2em;"></p>
+</body>
+</html>

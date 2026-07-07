@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  server:
+    build: 
+      context: ./server
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+      - redis
+    env_file:
+      - server/.env
+
+  client:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    environment:
+      - NEXT_PUBLIC_API_URL=http://server:4000/api/v1
+
+volumes:
+  mongo_data:
